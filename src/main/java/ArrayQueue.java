@@ -1,57 +1,43 @@
-import java.util.Objects;
+public class ArrayQueue {
+    private int[] arr;
+    private int front, rear, size, capacity;
 
-public class ArrayQueue<E> implements QueueADT<E> {
-    private final E[] data;
-    private int front = 0;  // index of the front element
-    private int size = 0;   // number of elements in the queue
-
-    @SuppressWarnings("unchecked")
     public ArrayQueue(int capacity) {
-        if (capacity <= 0) throw new IllegalArgumentException("capacity must be > 0");
-        this.data = (E[]) new Object[capacity];
+        this.capacity = capacity;
+        arr = new int[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
     }
 
-    @Override
-    public int size() {
-        // TODO: return current number of elements
-        return -1;
-    }
-
-    @Override
     public boolean isEmpty() {
-        // TODO: return true if size == 0
-        return true;
+        return size == 0;
     }
 
-    @Override
-    public E first() {
-        // TODO: if empty return null; else return data[front]
-        return null;
+    public boolean isFull() {
+        return size == capacity;
     }
 
-    @Override
-    public void enqueue(E e) {
-        Objects.requireNonNull(e, "Null elements are not supported in this assignment.");
-
-        // TODO:
-        // 1) if full (size == data.length) throw IllegalStateException
-        // 2) compute available index = (front + size) % data.length
-        // 3) store e there
-        // 4) increment size
+    public void enqueue(int x) {
+        if (isFull()) return;
+        rear = (rear + 1) % capacity;
+        arr[rear] = x;
+        size++;
     }
 
-    @Override
-    public E dequeue() {
-        // TODO:
-        // 1) if empty return null
-        // 2) store answer = data[front]
-        // 3) set data[front] = null (help GC)
-        // 4) front = (front + 1) % data.length
-        // 5) decrement size
-        // 6) return answer
-        return null;
+    public int dequeue() {
+        if (isEmpty()) return -1;
+        int val = arr[front];
+        front = (front + 1) % capacity;
+        size--;
+        return val;
     }
 
-    // Helpful for debugging (not graded)
-    int capacity() { return data.length; }
+    public int peek() {
+        if (isEmpty()) return -1;
+        return arr[front];
+    }
 }
+
+
+       
