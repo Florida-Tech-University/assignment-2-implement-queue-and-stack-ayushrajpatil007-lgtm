@@ -1,44 +1,36 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class StackUsingQueue implements StackADT {
 
-    private ArrayQueue q1;
-    private ArrayQueue q2;
+    private Queue<Integer> q;
     private int capacity;
-    private int size;
 
     public StackUsingQueue(int capacity) {
         this.capacity = capacity;
-        q1 = new ArrayQueue(capacity);
-        q2 = new ArrayQueue(capacity);
-        size = 0;
+        q = new LinkedList<>();
     }
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return q.isEmpty();
     }
 
     @Override
     public boolean isFull() {
-        return size == capacity;
+        return q.size() == capacity;
     }
 
     @Override
     public void push(int x) {
         if (isFull()) {
-            return; // NO exception
+            return;
         }
-
-        q2.enqueue(x);
-
-        while (!q1.isEmpty()) {
-            q2.enqueue(q1.dequeue());
+        q.add(x);
+        int size = q.size();
+        for (int i = 1; i < size; i++) {
+            q.add(q.remove());
         }
-
-        ArrayQueue temp = q1;
-        q1 = q2;
-        q2 = temp;
-
-        size++;
     }
 
     @Override
@@ -46,8 +38,7 @@ public class StackUsingQueue implements StackADT {
         if (isEmpty()) {
             return -1;
         }
-        size--;
-        return q1.dequeue();
+        return q.remove();
     }
 
     @Override
@@ -55,14 +46,15 @@ public class StackUsingQueue implements StackADT {
         if (isEmpty()) {
             return -1;
         }
-        return q1.peek();
+        return q.peek();
     }
 
     @Override
     public int size() {
-        return size;
+        return q.size();
     }
 }
+
 
 
 
