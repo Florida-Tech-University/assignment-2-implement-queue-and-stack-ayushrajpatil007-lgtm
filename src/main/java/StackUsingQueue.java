@@ -5,6 +5,7 @@ public class StackUsingQueue implements StackADT {
 
     private Queue<Integer> q = new LinkedList<>();
 
+    @Override
     public void push(int x) {
         q.add(x);
         int size = q.size();
@@ -13,18 +14,22 @@ public class StackUsingQueue implements StackADT {
         }
     }
 
+    @Override
     public int pop() {
         if (q.isEmpty()) return -1;
         return q.remove();
     }
 
-    public int top() {
+    @Override
+    public int peek() {
         if (q.isEmpty()) return -1;
         return q.peek();
     }
 
+    @Override
     public boolean isEmpty() {
         return q.isEmpty();
     }
 }
+
 
