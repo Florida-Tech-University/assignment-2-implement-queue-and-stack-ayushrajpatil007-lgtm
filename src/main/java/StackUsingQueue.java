@@ -1,30 +1,40 @@
-public class ArrayQueue implements QueueADT {
+import java.util.LinkedList;
+import java.util.Queue;
 
-    private int[] arr;
-    private int front, rear, size, capacity;
+public class StackUsingQueue implements StackADT {
 
-    public ArrayQueue(int capacity) {
-        this.capacity = capacity;
-        arr = new int[capacity];
-        front = 0;
-        rear = -1;
-        size = 0;
+    private Queue<Integer> q = new LinkedList<>();
+
+    @Override
+    public void push(int x) {
+        q.add(x);
+        int size = q.size();
+        for (int i = 1; i < size; i++) {
+            q.add(q.remove());
+        }
+    }
+
+    @Override
+    public int pop() {
+        if (q.isEmpty()) {
+            return -1;
+        }
+        return q.remove();
+    }
+
+    @Override
+    public int peek() {
+        if (q.isEmpty()) {
+            return -1;
+        }
+        return q.peek();
     }
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return q.isEmpty();
     }
-
-    @Override
-    public boolean isFull() {
-        return size == capacity;
-    }
-
-    @Override
-    public void enqueue(int x) {
-        if (isFull()) {
-            throw new IllegalStateExcep
 }
+
 
 
