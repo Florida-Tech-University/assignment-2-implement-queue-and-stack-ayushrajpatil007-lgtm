@@ -1,44 +1,29 @@
-import java.util.Objects;
+import java.util.LinkedList;
+import java.util.Queue;
 
-public class StackUsingQueue<E> implements StackADT<E> {
-    private final QueueADT<E> q;
+public class StackUsingQueue {
+    private Queue<Integer> q = new LinkedList<>();
 
-    public StackUsingQueue(int capacity) {
-        this.q = new ArrayQueue<>(capacity);
+    public void push(int x) {
+        q.add(x);
+        int size = q.size();
+        for (int i = 1; i < size; i++) {
+            q.add(q.remove());
+        }
     }
 
-    @Override
-    public int size() {
-        // TODO: return q.size()
-        return -1;
+    public int pop() {
+        if (q.isEmpty()) return -1;
+        return q.remove();
     }
 
-    @Override
+    public int top() {
+        if (q.isEmpty()) return -1;
+        return q.peek();
+    }
+
     public boolean isEmpty() {
-        // TODO: return q.isEmpty()
-        return true;
-    }
-
-    @Override
-    public E top() {
-        // TODO: return q.first()
-        return null;
-    }
-
-    @Override
-    public void push(E e) {
-        Objects.requireNonNull(e, "Null elements are not supported in this assignment.");
-
-        // TODO:
-        // 1) q.enqueue(e)
-        // 2) rotate (size-1) times:
-        //    q.enqueue(q.dequeue());
-        // so the newest element becomes the front of the queue.
-    }
-
-    @Override
-    public E pop() {
-        // TODO: return q.dequeue()
-        return null;
+        return q.isEmpty();
     }
 }
+
