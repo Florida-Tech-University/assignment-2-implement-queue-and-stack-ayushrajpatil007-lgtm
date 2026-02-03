@@ -24,7 +24,7 @@ public class ArrayQueue implements QueueADT {
     @Override
     public void enqueue(int x) {
         if (isFull()) {
-            return;   // ❌ NO exception
+            throw new IllegalStateException("Queue is full");
         }
         rear = (rear + 1) % capacity;
         arr[rear] = x;
@@ -34,7 +34,7 @@ public class ArrayQueue implements QueueADT {
     @Override
     public int dequeue() {
         if (isEmpty()) {
-            return -1;   // ✅ REQUIRED
+            throw new IllegalStateException("Queue is empty");
         }
         int val = arr[front];
         front = (front + 1) % capacity;
@@ -45,7 +45,7 @@ public class ArrayQueue implements QueueADT {
     @Override
     public int peek() {
         if (isEmpty()) {
-            return -1;   // ✅ REQUIRED
+            throw new IllegalStateException("Queue is empty");
         }
         return arr[front];
     }
@@ -60,6 +60,7 @@ public class ArrayQueue implements QueueADT {
         return capacity;
     }
 }
+
 
 
 
