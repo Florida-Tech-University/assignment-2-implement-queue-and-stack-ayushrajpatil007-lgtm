@@ -11,41 +11,43 @@ public class ArrayQueue implements QueueADT {
         size = 0;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
     public boolean isFull() {
         return size == capacity;
     }
 
+    @Override
     public void enqueue(int x) {
-        if (isFull()) return;
+        if (isFull()) {
+            throw new IllegalStateException("Queue is full");
+        }
         rear = (rear + 1) % capacity;
         arr[rear] = x;
         size++;
     }
 
+    @Override
     public int dequeue() {
-        if (isEmpty()) return -1;
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
         int val = arr[front];
         front = (front + 1) % capacity;
         size--;
         return val;
     }
 
+    @Override
     public int peek() {
-        if (isEmpty()) return -1;
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
         return arr[front];
     }
 }
 
-public class Main {
-    public static void main(String[] args) {
-        ArrayQueue a = new ArrayQueue(12);
-        a.enqueue(10);
-        a.enqueue(20);
-        System.out.println(a.dequeue()); // 10
-        System.out.println(a.peek());    // 20
-    }
-}
