@@ -1,5 +1,5 @@
-public class ArrayQueue {
-    private int[] arr;
+public class ArrayQueue implements QueueADT {
+   private int[] arr;
     private int front, rear, size, capacity;
 
     public ArrayQueue(int capacity) {
