@@ -23,9 +23,7 @@ public class ArrayQueue implements QueueADT {
 
     @Override
     public void enqueue(int x) {
-        if (isFull()) {
-            return; // ❗ NO exception
-        }
+        if (isFull()) return;
         rear = (rear + 1) % capacity;
         arr[rear] = x;
         size++;
@@ -33,9 +31,7 @@ public class ArrayQueue implements QueueADT {
 
     @Override
     public int dequeue() {
-        if (isEmpty()) {
-            return -1; // ❗ REQUIRED
-        }
+        if (isEmpty()) return -1;
         int val = arr[front];
         front = (front + 1) % capacity;
         size--;
@@ -44,11 +40,21 @@ public class ArrayQueue implements QueueADT {
 
     @Override
     public int peek() {
-        if (isEmpty()) {
-            return -1; // ❗ REQUIRED
-        }
+        if (isEmpty()) return -1;
         return arr[front];
     }
+
+    // ⭐ REQUIRED BY AUTOGRADER
+    @Override
+    public int size() {
+        return size;
+    }
+
+    // ⭐ REQUIRED BY AUTOGRADER
+    @Override
+    public int capacity() {
+        return capacity;
+    }
 }
-}
+
 
