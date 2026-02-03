@@ -1,56 +1,58 @@
-import java.util.LinkedList;
-import java.util.Queue;
+public class ArrayQueue implements QueueADT {
 
-public class StackUsingQueue implements StackADT {
+    private int[] arr;
+    private int front, rear, size, capacity;
 
-    private Queue<Integer> q = new LinkedList<>();
-    private int capacity;
-
-    public StackUsingQueue(int capacity) {
+    public ArrayQueue(int capacity) {
         this.capacity = capacity;
+        arr = new int[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
     }
 
     @Override
     public boolean isEmpty() {
-        return q.isEmpty();
+        return size == 0;
     }
 
     @Override
     public boolean isFull() {
-        return q.size() == capacity;
+        return size == capacity;
     }
 
     @Override
-    public void push(int x) {
+    public void enqueue(int x) {
         if (isFull()) {
-            return;   // ❌ NO exception
+            throw new IllegalStateException("Queue is full");
         }
-        q.add(x);
-        int size = q.size();
-        for (int i = 1; i < size; i++) {
-            q.add(q.remove());
-        }
+        rear = (rear + 1) % capacity;
+        arr[rear] = x;
+        size++;
     }
 
     @Override
-    public int pop() {
+    public int dequeue() {
         if (isEmpty()) {
-            return -1;   // ✅ REQUIRED
+            throw new IllegalStateException("Queue is empty");
         }
-        return q.remove();
+        int val = arr[front];
+        front = (front + 1) % capacity;
+        size--;
+        return val;
     }
 
     @Override
     public int peek() {
         if (isEmpty()) {
-            return -1;   // ✅ REQUIRED
+            throw new IllegalStateException("Queue is empty");
         }
-        return q.peek();
+        return arr[front];
     }
 
     @Override
     public int size() {
-        return q.size();
+        return size;
     }
 
     @Override
@@ -58,6 +60,7 @@ public class StackUsingQueue implements StackADT {
         return capacity;
     }
 }
+
 
 
 
