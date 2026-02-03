@@ -1,7 +1,8 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class StackUsingQueue {
+public class StackUsingQueue implements StackADT {
+
     private Queue<Integer> q = new LinkedList<>();
 
     public void push(int x) {
