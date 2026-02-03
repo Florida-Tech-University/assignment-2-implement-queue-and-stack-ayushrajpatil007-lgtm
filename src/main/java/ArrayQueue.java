@@ -1,5 +1,5 @@
-public class ArrayQueue implements QueueADT {
-   private int[] arr;
+class ArrayQueue {
+    private int[] arr;
     private int front, rear, size, capacity;
 
     public ArrayQueue(int capacity) {
@@ -39,5 +39,12 @@ public class ArrayQueue implements QueueADT {
     }
 }
 
-
-       
+public class Main {
+    public static void main(String[] args) {
+        ArrayQueue a = new ArrayQueue(12);
+        a.enqueue(10);
+        a.enqueue(20);
+        System.out.println(a.dequeue()); // 10
+        System.out.println(a.peek());    // 20
+    }
+}
