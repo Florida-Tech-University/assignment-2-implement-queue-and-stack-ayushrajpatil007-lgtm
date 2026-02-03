@@ -1,7 +1,10 @@
 public class ArrayQueue implements QueueADT {
 
     private int[] arr;
-    private int front, rear, size, capacity;
+    private int front;
+    private int rear;
+    private int size;
+    private int capacity;
 
     public ArrayQueue(int capacity) {
         this.capacity = capacity;
@@ -34,7 +37,7 @@ public class ArrayQueue implements QueueADT {
     @Override
     public int dequeue() {
         if (isEmpty()) {
-            return -1; // REQUIRED
+            return -1; // REQUIRED by autograder
         }
         int val = arr[front];
         front = (front + 1) % capacity;
@@ -50,6 +53,7 @@ public class ArrayQueue implements QueueADT {
         return arr[front];
     }
 }
+
 
 
 
