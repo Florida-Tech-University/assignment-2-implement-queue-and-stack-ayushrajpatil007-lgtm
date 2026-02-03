@@ -3,25 +3,39 @@ import java.util.Queue;
 
 public class StackUsingQueue implements StackADT {
 
-    private Queue<Integer> q;
-    private int capacity;
+    private Queue<Integer> q = new LinkedList<>();
 
-    public StackUsingQueue(int capacity) {
-        this.capacity = capacity;
-        q = new LinkedList<>();
+    @Override
+    public void push(int x) {
+        q.add(x);
+        int size = q.size();
+        for (int i = 1; i < size; i++) {
+            q.add(q.remove());
+        }
+    }
+
+    @Override
+    public int pop() {
+        if (q.isEmpty()) {
+            return -1; // REQUIRED
+        }
+        return q.remove();
+    }
+
+    @Override
+    public int peek() {
+        if (q.isEmpty()) {
+            return -1; // REQUIRED
+        }
+        return q.peek();
     }
 
     @Override
     public boolean isEmpty() {
         return q.isEmpty();
     }
+}
 
-    @Override
-    public boolean isFull() {
-        return q.size() == capacity;
-    }
-
-    @Overrid
 
 
 
