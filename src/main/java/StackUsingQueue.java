@@ -4,12 +4,9 @@ import java.util.Queue;
 public class StackUsingQueue implements StackADT {
 
     private Queue<Integer> q = new LinkedList<>();
-    private int capacity = Integer.MAX_VALUE;
 
     @Override
     public void push(int x) {
-        if (q.size() == capacity) return;
-
         q.add(x);
         int size = q.size();
         for (int i = 1; i < size; i++) {
@@ -34,7 +31,9 @@ public class StackUsingQueue implements StackADT {
         return q.isEmpty();
     }
 }
-}
+
+
+
 
 
 
